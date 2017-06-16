@@ -12,12 +12,14 @@ int main(){
     int i,j,k;
     int n,m;
     scanf("%d%d",&n,&m);
-    int arr[n+1][m+1];
+    short arr[n+1][m+1];
     rep(i,0,n)
         rep(j,0,m)
             scanf("%d",&arr[i][j]);
 
     for(int i=0;i<n;++i){
-        
+        for(int j=0;j<n;++j){
+            
+        }
     }
 }
