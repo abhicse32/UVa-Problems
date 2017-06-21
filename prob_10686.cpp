@@ -25,9 +25,9 @@ using namespace std;
 class Problem{
 public:
 	string name;
-	vector<string> words;
+	set<string> words;
 	int diff;
-	Problem(string name,vector<string>& words, int diff){
+	Problem(string name,set<string>& words, int diff){
 		this->name= name;
 		this->words= words;
 		this->diff= diff;
@@ -42,28 +42,37 @@ int main(){
 	string str,str2;
 	set<string> text_map;
 	while(n--){
-		scanf("%d\n",&c);
+		scanf("%d",&c);
 		rep(j,0,c){
 			cin >> str >> w >> x;
-			vector<string>vect(w);
-			rep(i,0,w) cin >> vect[i];
+			set<string>vect;
+			rep(i,0,w){
+				cin >> str2;
+				vect.insert(str2);
+			}
 			Problem p(str,vect,x);
 			database.push_back(p);
 		}
-		getchar();
+		cin.ignore(100,'\n');
 		while(getline(cin,str),str!=""){
+			int len= str.length();
+			for(i=0;i<len;++i)
+				if(!isalpha(str[i]))
+					str[i]=' ';
+			//cout << str <<endl;
 			stringstream stream(str);
 			while(stream>> str2)
 				text_map.insert(str2);
 		}
-
+		// cout << c <<endl;
 		bool flag= false;
 		for(int i=0;i<c;++i){
-			vector<string>& vect= database[i].words;
+			set<string>& vect= database[i].words;
 			int count=0;
 			for(auto& val1: vect)
 				if(text_map.find(val1)!=text_map.end())
 					++count;
+	
 			if(count>= database[i].diff){
 				if(flag)
 					cout << ","<<database[i].name;
